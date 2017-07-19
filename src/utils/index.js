@@ -1,0 +1,1 @@
+export const colorByValue = (num) => num > 0 ? '#83DE8D' : num < 0 ? '#EA4335' : undefined
