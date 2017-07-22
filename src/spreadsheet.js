@@ -40,7 +40,7 @@ export const handleClientLoad = () => new Promise(resolve => gapi.load('client:a
 
 
 
-const mapStock = ([code, shares, currentPrice, marketValue]) => ({
+const mapStock = ([code, shares, currentPrice, marketValue, totalPl, totalPlPct]) => ({
   code,
   shares,
   currentPrice,
@@ -51,8 +51,8 @@ const mapStock = ([code, shares, currentPrice, marketValue]) => ({
     total: {
       buy: 0,
       sell: 0,
-      pl: 0,
-      plPct: 0
+      pl: totalPl,
+      plPct: totalPlPct
     },
     unrealized: {
       buy: 0,
@@ -95,7 +95,7 @@ const mapStockDetails = (code, values) => ({
   }
 })
 
-const mapTransaction = ([code, type, date, shares, price, total]) => ({
+const mapTransaction = ([code, type, date, shares, price, fee, total]) => ({
   code,
   type,
   date,
@@ -108,14 +108,14 @@ const mapTransaction = ([code, type, date, shares, price, total]) => ({
 export const getStocks = () =>
   gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: process.env.REACT_APP_GOOGLE_SPREADSHEET_ID,
-    range: `Stocks!A2:F7`,
+    range: `Stocks!A2:F8`,
     valueRenderOption: 'UNFORMATTED_VALUE'
   }).then(response => response.result.values.map(mapStock))
 
 export const getTransactions = (stockCode) =>
   gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: process.env.REACT_APP_GOOGLE_SPREADSHEET_ID,
-    range: `${stockCode}!A2:F`,
+    range: `${stockCode}!A2:G`,
     valueRenderOption: 'UNFORMATTED_VALUE',
     dateTimeRenderOption: 'FORMATTED_STRING'
   }).then(response => response.result.values.map(mapTransaction))
@@ -123,7 +123,7 @@ export const getTransactions = (stockCode) =>
 export const getStockDetails = (stockCode) =>
   gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: process.env.REACT_APP_GOOGLE_SPREADSHEET_ID,
-    range: `${stockCode}!J1:N7`,
+    range: `${stockCode}!L1:P7`,
     valueRenderOption: 'UNFORMATTED_VALUE'
   }).then(response => mapStockDetails(stockCode, response.result.values))
 

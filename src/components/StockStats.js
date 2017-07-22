@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { colorByValue } from '../utils'
 import { format } from 'd3-format'
 import { Flex, Box } from 'grid-styled'
 
+import { colorByValue } from '../utils'
 import { Table } from '../components/layout'
 
 const Detail = ({title, children}) => (
