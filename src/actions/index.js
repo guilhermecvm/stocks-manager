@@ -16,6 +16,7 @@ function action(type, payload = {}) {
 
 export const STOCK = createRequestTypes('STOCK', 'GET')
 export const STOCKS = createRequestTypes('STOCKS', 'GET')
+export const USER = createRequestTypes('USER', 'SIGNIN')
 
 export const stock = {
   getAll: id => action(STOCKS['GET'][REQUEST], {}),
@@ -24,4 +25,10 @@ export const stock = {
   get: id => action(STOCK['GET'][REQUEST], {id}),
   getSuccess: (stock) => action(STOCK['GET'][SUCCESS], {stock}),
   // getFailure: (error) => action(STOCK['GET'][FAILURE], {error}),
+}
+
+export const user = {
+  signIn: id => action(USER['SIGNIN'][REQUEST], {id}),
+  signInSuccess: (user) => action(USER['SIGNIN'][SUCCESS], {user}),
+  signInFailure: (user) => action(USER['SIGNIN'][FAILURE], {user}),
 }

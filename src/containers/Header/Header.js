@@ -3,6 +3,7 @@ import { Flex, Box } from 'grid-styled'
 
 import logo from '../../logo.png'
 import spreadsheet from '../../spreadsheet'
+import { Button } from '../../components/layout'
 
 class Header extends React.Component {
   signIn() {
@@ -15,7 +16,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <Flex p={5} align="center">
+      <Flex p={5} align="center" style={styles.header}>
         <Box>
           <img src={logo} style={{width: 32}} alt="Stocks Manager" />
         </Box>
@@ -23,11 +24,19 @@ class Header extends React.Component {
           Stocks Manager
         </Box>
         <Box ml={5}>
-          <button id="authorize-button" onClick={this.signIn}>Authorize</button>
-          <button id="signout-button" onClick={this.signIn}>Sign Out</button>
+          {this.props.signedIn
+            ? (<Button onClick={this.signOut}>Sign Out</Button>)
+            : (<Button onClick={this.signIn}>Authorize</Button>)
+          }
         </Box>
       </Flex>
     )
+  }
+}
+
+const styles = {
+  header: {
+    backgroundColor: 'rgba(0,0,0, 0.4)'
   }
 }
 

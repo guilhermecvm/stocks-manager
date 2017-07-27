@@ -29,14 +29,16 @@ export const init = () =>
     clientId: CLIENT_ID,
     scope: SCOPES
   }).then(function () {
-    // Listen for sign-in state changes.
-    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
-
     // Handle the initial sign-in state.
     updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+
+    return gapi.auth2.getAuthInstance().isSignedIn.get()
   })
 
 export const handleClientLoad = () => new Promise(resolve => gapi.load('client:auth2', () => init().then(resolve)))
+
+export const listenSignInChanges = (updateSignInStatus) => new Promise(resolve =>
+  gapi.auth2.getAuthInstance().isSignedIn.listen(resolve))
 
 
 
@@ -142,5 +144,6 @@ export default {
   signOut,
   updateSignInStatus,
   getStocks,
-  getStock
+  getStock,
+  listenSignInChanges
 }
