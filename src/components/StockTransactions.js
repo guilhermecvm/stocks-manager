@@ -35,7 +35,7 @@ const columns = [
 ]
 
 const StockTransactions = (props) => (
-  <Table columns={columns} dataSource={props.transactions} />
+  <Table columns={columns} dataSource={props.transactions} title="Transactions" />
 )
 
 StockTransactions.propTypes = {

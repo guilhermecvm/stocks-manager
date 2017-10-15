@@ -3,15 +3,20 @@ import PropTypes from 'prop-types'
 import { createComponent, css }from './createComponent'
 
 const Table = (props) => {
-  const { columns, dataSource, className, style } = props
+  const { columns, dataSource, className, style, title } = props
 
   return (
     <table className={className} style={style}>
+      {title && (
+      <caption style={styles.title}>
+        {title}
+      </caption>
+      )}
       <tbody>
       {dataSource.map((data, index) => (
         <tr key={data.key || index+1}>
         {columns.map(column => (
-          <td key={column.key} style={{padding: 10, textAlign: column.align}}>
+          <td key={column.key} style={{padding: 15, textAlign: column.align}}>
             {column.render ? column.render(data[column.dataIndex], data) : data[column.dataIndex]}
           </td>
         ))}
@@ -33,14 +38,23 @@ Table.propTypes = {
   dataSource: PropTypes.array,
   style: PropTypes.object,
   layout: PropTypes.string,
-  bordered: PropTypes.bool
-
+  bordered: PropTypes.bool,
+  title: PropTypes.string,
 }
 
 Table.defaultProps = {
   columns: [],
   dataSource: [],
   bordered: false
+}
+
+const styles = {
+  title: {
+    padding: 15,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    textAlign: 'left',
+    borderBottom: '10px solid #1e2032',
+  }
 }
 
 export default createComponent(Table).extend`
@@ -55,6 +69,6 @@ export default createComponent(Table).extend`
   `}
   
   & tr:not(:last-child) {
-    border-bottom: 2px solid #33354b
+    border-bottom: 10px solid #1e2032;
   }
 `

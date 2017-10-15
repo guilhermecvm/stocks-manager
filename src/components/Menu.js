@@ -12,7 +12,7 @@ const Link = (props) => (
   <NavLink
     activeStyle={{ backgroundColor: 'rgba(0, 0, 0, .5)' }}
     {...props}
-    style={{width:'100%',padding:10}}
+    style={{width:'100%',padding:'15px 10px'}}
   />
 )
 

@@ -31,7 +31,7 @@ class Stock extends React.Component {
           </Box>
           <Box
             w={[1, 1, 1, 2/6]}
-            p={10}
+            // p={10}
             style={{backgroundColor: '#2D2F43'}}
           >
             <StockTransactions transactions={stock.transactions} />
@@ -56,7 +56,7 @@ class Stock extends React.Component {
 
           <Box
             mt={20}
-            p={10}
+            // p={10}
             w={[1, 1, 1, 4/6]}
             style={{backgroundColor: '#2D2F43'}}
           >
